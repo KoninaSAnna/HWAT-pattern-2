@@ -12,7 +12,6 @@ import java.util.Locale;
 import static io.restassured.RestAssured.given;
 
 
-
 public class DataGenerator {
     private static final RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost")
@@ -30,7 +29,7 @@ public class DataGenerator {
     private static void sendRequest(RegistrationDto user) {
         given()
                 .spec(requestSpec)
-                .body (user)
+                .body(user)
                 .when()
                 .post("/api/system/users")
                 .then()
@@ -48,16 +47,16 @@ public class DataGenerator {
     }
 
     public static class Registration {
-        private Registration(){
+        private Registration() {
 
         }
 
-        public static RegistrationDto getUser (String status) {
+        public static RegistrationDto getUser(String status) {
             var user = new RegistrationDto(getRandomLogin(), getRandomPassword(), status);
             return user;
         }
 
-        public static RegistrationDto getRegisteredUser (String status) {
+        public static RegistrationDto getRegisteredUser(String status) {
             var registeredUser = getUser(status);
             sendRequest(registeredUser);
             return registeredUser;
@@ -68,6 +67,6 @@ public class DataGenerator {
     public static class RegistrationDto {
         String login;
         String password;
-        String status ;
+        String status;
     }
 }

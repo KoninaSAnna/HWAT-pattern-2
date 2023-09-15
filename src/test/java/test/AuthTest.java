@@ -42,10 +42,11 @@ class AuthTest {
                 .shouldHave(Condition.text("Ошибка! Неверно указан логин или пароль"))
                 .shouldBe(Condition.visible);
     }
+
     @Test
     @DisplayName("Blocked registered user")
     void ifBlockedUser() {
-        var blockerUser = getRegisteredUser ("blocked");
+        var blockerUser = getRegisteredUser("blocked");
         $("[data-test-id='login'] input").setValue(blockerUser.getLogin());
         $("[data-test-id='password'] input").setValue(blockerUser.getPassword());
         $("button.button").click();
